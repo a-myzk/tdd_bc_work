@@ -1,6 +1,3 @@
-# require ‘/Users/shibatadaiki/work_shiba/full_stack/sample.rb’
-# （↑のパスは、自動販売機ファイルが入っているパスを指定する）
-
 # ...ステップ0...
 # 初期設定（自動販売機インスタンスを作成して、vmという変数に代入する）
 # vm = VendingMachine.new
@@ -10,6 +7,23 @@
 # vm.current_slot_money
 # 作成した自動販売機に入れたお金を返してもらう
 # vm.return_money
+
+# 商品をインスタンスメソッドではなくクラスメソッドとして定義するため
+# self. をつかう。
+class Drink
+  #attr_readerはインスタンス変数の読み出し専用アクセサを定義できる。
+  attr_reader :name, :price
+
+  def initialize(name, price)
+    @name = name
+    @price = price
+  end
+
+  def self.cola
+    self.new('cola', 120)
+  end
+end
+
 class VendingMachine
   # 10円玉、50円玉、100円玉、500円玉、1000円札を１つずつ投入できる。
   #..... イミュータブル(中身を変更できない）な定数を定義したいときはfreezeを使う
@@ -19,6 +33,12 @@ class VendingMachine
   def initialize
     # 最初の自動販売機に入っている金額は0円
     @slot_money = 0
+    @stock_drink = []
+    5.times{@stock_drink.push(Drink.cola)}
+  end
+
+  def stock_drink
+    @stock_drink
   end
 
   # 投入金額の総計を取得できる。
@@ -42,19 +62,13 @@ class VendingMachine
     else
       # 自動販売機にお金を入れる
       puts "#{money}円は使用できません。"
-    # else 
-    #   nil != (money =~ /\A[a-z]+\z/)
-    #   puts "お金を入れてください。"
     end
-    #..... より簡易的な書き方（https://blog.jnito.com/entry/2013/05/22/073525）
-    # MONEY.include?(money) ? 
-    # nil.tap { @slot_money += money } : money
   end
 
   # 払い戻し操作を行うと、投入金額の総計を釣り銭として出力する。
   def return_money
     # 返すお金の金額を表示する
-    puts @slot_money
+    puts "お釣りは#{@slot_money}円です。"
     # 自動販売機に入っているお金を0円に戻す
     @slot_money = 0
   end

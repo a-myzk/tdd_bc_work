@@ -1,0 +1,48 @@
+# TDDBC大阪3.0/課題
+http://devtesting.jp/tddbc/?TDDBC%E5%A4%A7%E9%98%AA3.0%2F%E8%AA%B2%E9%A1%8C
+# TDDBC大阪2.0の自動販売機問題はなかなかの良問だった
+https://blog.jnito.com/entry/2013/05/22/073525
+# Romu-Muroga/tdd-bc-osaka3.0-task
+https://github.com/Romu-Muroga/tdd-bc-osaka3.0-task
+# TakayaSugiyama/vending_machine
+https://github.com/TakayaSugiyama/vending_machine
+# 【Ruby】attr_readerメソッドの使い方を基礎から学んで整理しよう
+https://pikawaka.com/ruby/attr_reader
+### 【Ruby入門】classのnewとinitializeについてまとめ
+https://www.sejuku.net/blog/21170
+# Rubyを始めたけど今ひとつRubyのオブジェクト指向というものが掴めないという人、ここに来て見て触って！
+https://melborne.github.io/2013/02/07/understand-ruby-object/
+
+
+require './lib/vending_machine.rb'
+require './lib/sample.rb'
+require './lib/memo.rb'
+require './lib/vm.rb'
+
+
+# 初期設定（自動販売機インスタンスを作成して、vmという変数に代入する）
+# 自販機スタート
+vm = VendingMachine.new
+
+# 自動販売機にお金を入れる
+vm.slot_money (100)
+vm.slot_money (500)
+vm.slot_money (5000)
+
+# 自動販売機に入れたお金がいくらかを確認する（表示する）
+vm.current_slot_money
+
+# 自動販売機に入れたお金を返してもらう
+vm.return_money
+
+# 格納されているジュースの情報（値段と名前と在庫）を取得する。
+vm.stock_drink
+
+# 購入できるか確認
+vm.purchase_check(Drink.cola)
+
+# 購入操作
+vm.buy(Drink.cola)
+vm.buy(Drink.water)
+vm.buy(Drink.redbull)
+

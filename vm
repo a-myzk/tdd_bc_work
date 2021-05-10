@@ -18,16 +18,18 @@ require './lib/vending_machine.rb'
 require './lib/sample.rb'
 require './lib/memo.rb'
 require './lib/vm.rb'
-
+require './vending_machine.rb'
 
 # 初期設定（自動販売機インスタンスを作成して、vmという変数に代入する）
 # 自販機スタート
+require './lib/vending_machine.rb'
 vm = VendingMachine.new
+vm.slot_money (500)
 
 # 自動販売機にお金を入れる
 vm.slot_money (100)
 vm.slot_money (500)
-vm.slot_money (5000)
+vm.slot_money (1000)
 
 # 自動販売機に入れたお金がいくらかを確認する（表示する）
 vm.current_slot_money
@@ -36,13 +38,25 @@ vm.current_slot_money
 vm.return_money
 
 # 格納されているジュースの情報（値段と名前と在庫）を取得する。
-vm.stock_drink
+vm.stock_drink(Drink.cola)
+vm.stock_drink(Drink.water)
+vm.stock_drink(Drink.redbull)
 
 # 購入できるか確認
-vm.purchase_check(Drink.cola)
+vm.purchasable(Drink.cola)
 
 # 購入操作
 vm.buy(Drink.cola)
 vm.buy(Drink.water)
 vm.buy(Drink.redbull)
 
+#ドリンクストック追加
+vm.store(Drink.cola)
+vm.store(Drink.water)
+vm.store(Drink.redbull)
+
+#売上金の確認
+vm.sale_amount
+
+#購入できるドリンクリスト
+vm.purchasable_drink_list

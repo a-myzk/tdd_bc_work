@@ -135,6 +135,7 @@ class VendingMachine
     puts "現在の売上合計は#{@sale_amount}円です。"
   end
 
+  #ステップ5 ジュース値段以上の投入金額が投入されている条件下で購入操作を行うと、釣り銭（投入金額とジュース値段の差分）を出力する。
   def purchasable(drink)
     if @slot_money >= drink.price && @stocks[drink.name.to_sym] > 0
       "#{drink.name}:#{@stocks[drink.name.to_sym]}"
